@@ -1,0 +1,38 @@
+<ion-header>
+    <ion-toolbar color="dark">
+      <ion-title class="default-title">Sign in</ion-title>
+    </ion-toolbar>
+</ion-header>
+  
+<ion-content>
+    <div class="container">
+        <form [formGroup]="form" (ngSubmit)="onSubmit()">
+            <mat-form-field class="default-input">
+                <mat-label>Username</mat-label>
+                <input matInput [formControl]="controls.username">
+                <mat-error *ngIf="controls.username.hasError('required')">Username is required</mat-error>
+                <mat-error *ngIf="controls.username.hasError('pattern')">Username can contain only latin characters and numbers</mat-error>
+            </mat-form-field>
+            <mat-form-field class="default-input">
+                <mat-label>Email</mat-label>
+                <input matInput [formControl]="controls.email">
+                <mat-error *ngIf="controls.email.hasError('required')">Email is required</mat-error>
+                <mat-error *ngIf="controls.email.hasError('email')">Incorrect email</mat-error>
+            </mat-form-field>
+            <mat-form-field class="default-input">
+                <mat-label>Password</mat-label>
+                <input matInput [formControl]="controls.password" type="password">
+                <mat-error *ngIf="controls.password.hasError('required')">Passwrod is required</mat-error>
+            </mat-form-field>
+            <mat-form-field class="default-input">
+                <mat-label>Repeat password</mat-label>
+                <input matInput [formControl]="controls.repeat_password" type="password">
+                <mat-error *ngIf="controls.repeat_password.hasError('matchPassword')">Repeat password must be equal to password</mat-error>
+            </mat-form-field>
+            <div class="actions">
+                <button mat-raised-button color="primary">Sign Up</button>
+                <button mat-button [routerLink]="['/auth/sign-in']">Sign in</button>
+            </div>
+        </form>
+    </div>
+</ion-content>

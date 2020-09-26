@@ -1,0 +1,23 @@
+<ion-header>
+    <ion-toolbar color="dark">
+      <ion-title class="default-title">
+        {{title}}
+      </ion-title>
+      <app-logout-button slot="end"></app-logout-button>
+    </ion-toolbar>
+</ion-header>
+  
+<ion-content [fullscreen]="true">
+    <div class="container">
+        <h3 class="text-center">Uncompleted tasks</h3>
+        <app-task-list 
+            [tasks]="tasks$ | async" 
+            (finishTask)="onTaskFinish($event)" 
+            (startTask)="onTaskStart($event)" 
+            (deleteTask)="onTaskDelete($event)"
+            (afterTaskEdited)="afterTaskEdited()"
+        ></app-task-list>
+    </div>
+
+</ion-content>
+  

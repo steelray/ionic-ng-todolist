@@ -1,0 +1,24 @@
+.menu-icon {
+  margin-right: 5px;
+}
+
+ion-list {
+  ion-item {
+    align-items: flex-start;
+    line-height: 1.5;
+    font-size: 16px;
+
+    &.in-progress {
+      --border-color: var(--ion-color-success)
+    }
+
+    div {
+      white-space: normal;
+    }
+
+    p {
+      font-size: 14px;
+      margin-top: 5px;
+    }
+  }
+}

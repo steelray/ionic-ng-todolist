@@ -1,0 +1,40 @@
+<ion-list class="task-list">
+    <ion-item *ngFor="let task of tasks;trackBy: trackByFn" [@items]="task" [class.in-progress]="task.status === statusList.IN_PROGRESS">
+        <ion-label>
+            <div class="task-title">{{task.title}}</div>
+            <p *ngIf="task.start_at">
+                <span>Start date: </span>
+                <strong>{{task.startAt | date:'short'}}</strong>
+            </p>
+            <p *ngIf="task.end_at">
+                <span>End time: </span>
+                <strong>{{task.endAt | date:'short'}}</strong>
+            </p>
+        </ion-label>
+
+        <button (click)="selectedTask = task" slot="end" mat-icon-button [matMenuTriggerFor]="menu" aria-label="Task menu" color="accent">
+            <ion-icon name="ellipsis-vertical-outline"></ion-icon>
+        </button>
+
+    </ion-item>
+</ion-list>
+<mat-menu #menu="matMenu">
+    <ng-container *ngIf="selectedTask">
+        <button *ngIf="selectedTask.canEdit" mat-menu-item (click)="onEdit()">
+            <ion-icon class="menu-icon" name="build-outline"></ion-icon>
+            <span>Edit</span>
+        </button>
+        <button *ngIf="selectedTask.canFinish" mat-menu-item (click)="onFinish()">
+            <ion-icon class="menu-icon" name="checkmark-outline"></ion-icon>
+            <span>Finish</span>
+        </button>
+        <button *ngIf="selectedTask.canStart" mat-menu-item (click)="onStart()">
+            <ion-icon class="menu-icon" name="golf-outline"></ion-icon>
+            <span>Start</span>
+        </button>
+        <button mat-menu-item (click)="onDelete()">
+            <ion-icon class="menu-icon" name="trash-outline"></ion-icon>
+            <span>Delete</span>
+        </button>
+    </ng-container>
+  </mat-menu>

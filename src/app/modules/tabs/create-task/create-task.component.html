@@ -1,0 +1,81 @@
+<ion-header *ngIf="!id">
+    <ion-toolbar color="dark">
+      <ion-title class="default-title">
+        {{title}}
+      </ion-title>
+      <app-logout-button slot="end"></app-logout-button>
+    </ion-toolbar>
+</ion-header>
+  
+<ion-content [fullscreen]="true">
+    <div class="container">
+        <form [formGroup]="form" (ngSubmit)="onSubmit()" #formDirective="ngForm">
+            <mat-form-field class="default-input">
+                <mat-label>Title</mat-label>
+                <input matInput [formControl]="controls.title">
+                <mat-error *ngIf="controls.title.hasError('required')">title is required</mat-error>
+            </mat-form-field>
+
+            <mat-form-field class="default-input">
+                <mat-chip-list #chipList aria-label="tag selection">
+                  <mat-chip
+                    *ngFor="let tag of selectedTags"
+                    [selectable]="true"
+                    [removable]="true"
+                    (removed)="onTagRemove(tag)">
+                    {{tag}}
+                    <mat-icon matChipRemove>cancel</mat-icon>
+                  </mat-chip>
+                  <input
+                    placeholder="New tag..."
+                    #tagInput
+                    [formControl]="form.get('tagValues')"
+                    [matAutocomplete]="auto"
+                    [matChipInputFor]="chipList"
+                    [matChipInputAddOnBlur]="true"
+                    [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+                    (matChipInputTokenEnd)="onTagAdd($event)">
+                </mat-chip-list>
+                <mat-autocomplete #auto="matAutocomplete" (optionSelected)="onTagSelect($event)">
+                  <mat-option *ngFor="let tag of tags$ | async" [value]="tag.id">
+                    {{tag.title}}
+                  </mat-option>
+                </mat-autocomplete>
+              </mat-form-field>
+
+            <mat-form-field class="default-input">
+                <mat-label>Priority</mat-label>
+                <input type="number" matInput [formControl]="controls.priority">
+            </mat-form-field>
+            <ion-item class="default-input">
+                <ion-label>Start Date</ion-label>
+                <ion-datetime [formControl]="controls.start_at" placeholder="Select start date|time" displayFormat="MMM DD, YYYY"></ion-datetime>
+            </ion-item>
+            <div class="actions">
+                <ng-container *ngIf="!id;else editActions">
+                    <button mat-raised-button color="primary" [disabled]="form.invalid || isLoading">
+                        <ng-container *ngIf="!isLoading;else: spinner">
+                            Create
+                        </ng-container>
+                    </button>
+
+
+                    <button mat-button type="button" [routerLink]="['/']">Back to list</button>
+                </ng-container>
+                <ng-template #editActions>
+                    <button mat-raised-button color="primary" [disabled]="form.invalid || isLoading">
+                        <ng-container *ngIf="!isLoading;else: spinner">
+                            Update
+                        </ng-container>
+                    </button>
+                    <button mat-button type="button" (click)="dismiss()">Cancel</button>
+                </ng-template>
+                <ng-template #spinner>
+                    <ion-spinner name="crescent"></ion-spinner>
+                </ng-template>
+            </div>
+        </form>
+    </div>
+    
+</ion-content>
+  

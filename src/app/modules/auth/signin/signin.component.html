@@ -1,0 +1,35 @@
+<ion-header>
+    <ion-toolbar color="dark">
+      <ion-title class="default-title">Sign in</ion-title>
+    </ion-toolbar>
+</ion-header>
+  
+<ion-content>
+    <div class="container">
+        <form [formGroup]="form" (ngSubmit)="onSubmit()">
+            <mat-form-field class="default-input">
+                <mat-label>Username</mat-label>
+                <input matInput [formControl]="controls.username">
+                <mat-error *ngIf="controls.username.hasError('required')">Username is required</mat-error>
+                <mat-error *ngIf="controls.username.hasError('pattern')">Username can contain only latin characters and numbers</mat-error>
+            </mat-form-field>
+            <mat-form-field class="default-input">
+                <mat-label>Password</mat-label>
+                <input matInput [formControl]="controls.password" type="password">
+                <mat-error *ngIf="controls.password.hasError('required')">Passwrod is required</mat-error>
+                <mat-error *ngIf="controls.password.hasError('notFound')">Incorrect username or password</mat-error>
+            </mat-form-field>
+            <div class="actions">
+                <button mat-raised-button color="primary" [disabled]="form.invalid || isLoading">
+                    <ng-container *ngIf="!isLoading;else: spinner">
+                        Sign in
+                    </ng-container>
+                    <ng-template #spinner>
+                        <ion-spinner name="crescent"></ion-spinner>
+                    </ng-template>
+                </button>
+                <button mat-button [routerLink]="['/auth/sign-up']">Sign up</button>
+            </div>
+        </form>
+    </div>
+</ion-content>

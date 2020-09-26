@@ -1,0 +1,6 @@
+<ng-container *ngIf="authService.isAuthed">
+    <ng-container *ngIf="user$ | async as user">Hello, {{user.username}}!</ng-container>
+    <button (click)="onLogout()" mat-button title="Logout">
+        <ion-icon name="log-out-outline"></ion-icon>
+    </button>
+</ng-container>

@@ -1,0 +1,27 @@
+<ion-header>
+    <ion-toolbar color="dark">
+      <ion-title class="default-title">
+        {{title}}
+      </ion-title>
+      <app-logout-button slot="end"></app-logout-button>
+    </ion-toolbar>
+</ion-header>
+  
+<ion-content [fullscreen]="true">
+    <div class="container">
+        <h3 class="text-center">Completed tasks</h3>
+        <div class="tasks-filter">
+            <ion-input [formControl]="controls.title" placeholder="Search by title"></ion-input>
+            <button mat-mini-fab (click)="showFilter()"><ion-icon name="funnel-outline"></ion-icon></button>
+        </div>
+        <app-task-list [tasks]="tasks" (deleteTask)="onTaskDelete($event)"></app-task-list>
+        <ion-infinite-scroll threshold="50px" (ionInfinite)="loadData($event)">
+            <ion-infinite-scroll-content
+                loadingSpinner="bubbles"
+                loadingText="Loading more data...">
+            </ion-infinite-scroll-content>
+        </ion-infinite-scroll>
+    </div>
+    
+</ion-content>
+  

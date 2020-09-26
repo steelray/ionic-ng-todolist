@@ -1,0 +1,22 @@
+<ion-header>
+    <ion-toolbar color="dark">
+        <button mat-raised-button slot="start" (click)="dismiss(false)">reset</button>
+        <button mat-raised-button slot="end" color="accent" (click)="dismiss(true)">Apply</button>
+    </ion-toolbar>
+    
+</ion-header>
+<ion-content>
+    <div class="container">
+        <ion-item class="default-input">
+            <ion-label>Start Date</ion-label>
+            <ion-datetime [formControl]="controls.startAt" placeholder="Select start date|time" displayFormat="MMM DD, YYYY"></ion-datetime>
+        </ion-item>
+        <ion-item class="default-input">
+            <ion-label>Lead time|Term</ion-label>
+            <ion-datetime [formControl]="controls.endAt" placeholder="Set lead time | term" displayFormat="MMM DD, YYYY"></ion-datetime>
+        </ion-item>
+        <div class="actions">
+            <button mat-raised-button color="primary" (click)="resetFilter()">Reset filter</button>
+        </div>
+    </div>
+</ion-content>

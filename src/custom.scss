@@ -1,0 +1,66 @@
+ion-content {
+  --padding-top: 30px;
+  --padding-bottom: 30px;
+}
+
+ion-list {
+  ion-item {
+    --padding-start: 0;
+    --inner-padding-end: 0;
+  }
+}
+
+
+.open_picker {
+  touch-action: none;
+}
+
+.mat-form-field-appearance-legacy .mat-form-field-underline {
+  background: var(--ion-item-border-color, var(--ion-border-color, var(--ion-color-step-150, rgba(0, 0, 0, 0.13))));
+}
+
+.default-input {
+  width: 100%;
+  margin-bottom: 10px;
+  --padding-start: 0;
+  padding-left: 0;
+}
+
+.default-title {
+  text-align: left;
+  padding-inline-start: 20px;
+  padding-inline-end: 0;
+}
+
+.container {
+  max-width: var(--container-max-width);
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+.actions {
+  text-align: center;
+  margin-top: 20px;
+
+  button {
+    width: 100%;
+    margin-bottom: 5px;
+  }
+}
+
+.text {
+  &-center {
+    text-align: center;
+  }
+}
+
+.mat-form-field-appearance-legacy .mat-form-field-label,
+.default-input {
+
+  .sc-ion-label-md-h,
+  .sc-ion-label-md-h,
+  mat-label {
+    color: var(--ion-color-medium);
+    --color: var(--ion-color-medium);
+  }
+}

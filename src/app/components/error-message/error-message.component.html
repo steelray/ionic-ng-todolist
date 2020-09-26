@@ -1,0 +1,6 @@
+<div *ngIf="errorService.error$ | async as error" @slideInOut>
+    {{error}}
+    <button (click)="onClose()">
+        <ion-icon name="close-outline"></ion-icon>
+    </button>
+</div>
