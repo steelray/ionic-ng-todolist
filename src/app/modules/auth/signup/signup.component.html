@@ -11,13 +11,14 @@
                 <mat-label>Username</mat-label>
                 <input matInput [formControl]="controls.username">
                 <mat-error *ngIf="controls.username.hasError('required')">Username is required</mat-error>
-                <mat-error *ngIf="controls.username.hasError('pattern')">Username can contain only latin characters and numbers</mat-error>
+                <mat-error *ngIf="controls.username.hasError('serverError')">{{controls.username.errors.serverError}}</mat-error>
             </mat-form-field>
             <mat-form-field class="default-input">
                 <mat-label>Email</mat-label>
                 <input matInput [formControl]="controls.email">
                 <mat-error *ngIf="controls.email.hasError('required')">Email is required</mat-error>
                 <mat-error *ngIf="controls.email.hasError('email')">Incorrect email</mat-error>
+                <mat-error *ngIf="controls.email.hasError('serverError')">{{controls.email.errors.serverError}}</mat-error>
             </mat-form-field>
             <mat-form-field class="default-input">
                 <mat-label>Password</mat-label>
@@ -30,7 +31,14 @@
                 <mat-error *ngIf="controls.repeat_password.hasError('matchPassword')">Repeat password must be equal to password</mat-error>
             </mat-form-field>
             <div class="actions">
-                <button mat-raised-button color="primary">Sign Up</button>
+                <button mat-raised-button color="primary" [disabled]="form.invalid || isLoading">
+                    <ng-container *ngIf="!isLoading;else: spinner">
+                        Sign in
+                    </ng-container>
+                    <ng-template #spinner>
+                        <ion-spinner name="crescent"></ion-spinner>
+                    </ng-template>
+                </button>
                 <button mat-button [routerLink]="['/auth/sign-in']">Sign in</button>
             </div>
         </form>

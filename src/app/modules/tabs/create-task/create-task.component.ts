@@ -53,13 +53,6 @@ export class CreateTaskComponent implements OnInit {
     if (this.id) {
       this.isLoading = true;
       this.taskService.fetchOne(this.id).pipe(
-        // map(task => {
-        //   delete (task.id);
-        //   delete (task.end_at);
-        //   delete (task.status);
-        //   delete (task.tags);
-        //   return task;
-        // }),
         takeUntil(this.onDestroy$)
       ).subscribe(task => {
 

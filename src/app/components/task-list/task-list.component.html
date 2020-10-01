@@ -2,11 +2,11 @@
     <ion-item *ngFor="let task of tasks;trackBy: trackByFn" [@items]="task" [class.in-progress]="task.status === statusList.IN_PROGRESS">
         <ion-label>
             <div class="task-title">{{task.title}}</div>
-            <p *ngIf="task.start_at">
+            <p *ngIf="task.status === statusList.IN_PROGRESS || (task.status === statusList.DONE && task.start_at)">
                 <span>Start date: </span>
                 <strong>{{task.startAt | date:'short'}}</strong>
             </p>
-            <p *ngIf="task.end_at">
+            <p *ngIf="task.status === statusList.DONE">
                 <span>End time: </span>
                 <strong>{{task.endAt | date:'short'}}</strong>
             </p>
